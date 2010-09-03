@@ -10,12 +10,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100903030609) do
+ActiveRecord::Schema.define(:version => 20100903195122) do
 
   create_table "items", :force => true do |t|
     t.string   "name"
     t.float    "cost"
-    t.integer  "restaraunt_id"
+    t.integer  "restaurant_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
