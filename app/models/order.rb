@@ -11,7 +11,7 @@ class Order < ActiveRecord::Base
   end
 
   def cost
-    self.ordered_items.collect(&:item).collect(&:cost).inject(0, &:+)
+    self.ordered_items.collect(&:cost).inject(0, &:+)
   end
 
 end
