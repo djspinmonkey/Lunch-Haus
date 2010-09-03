@@ -9,10 +9,13 @@
       = link_to "peruse local restaurants", restaurants_path
 
 .main_links
-  %ul
+  %ul.block_links
     %li 
-      = link_to "Place an order", new_order_path
+      %a{ :href => new_order_path }
+        %p.title Place an order
     %li 
-      = link_to "Accept an order", orders_path
+      %a{ :href => orders_path }
+        %p.title Accept an order
     %li
-      = link_to "Settle up", '/'
+      %a{ :href => '#' }
+        %p.title Settle up

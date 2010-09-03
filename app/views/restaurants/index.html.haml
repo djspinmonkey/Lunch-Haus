@@ -1,19 +1,10 @@
-%h1 Listing restaurants
-
-%table
-  %tr
-    %th Name
-    %th
-    %th
-    %th
-
+%ul.block_links
   - @restaurants.each do |restaurant|
-    %tr
-      %td= restaurant.name
-      %td= link_to 'Show', restaurant
-      %td= link_to 'Edit', edit_restaurant_path(restaurant)
-      %td= link_to 'Destroy', restaurant, :confirm => 'Are you sure?', :method => :delete
-
-%br
-
-= link_to 'New restaurant', new_restaurant_path
+    %li[restaurant]
+      = link_to restaurant, :confirm => 'Really delete?', :method => :delete, :class => 'delete_link' do
+        &times;
+      - link_to restaurant do
+        %p.title= restaurant.name
+        %p.info= pluralize(restaurant.items.length, 'menu item')
+.add_new
+  = link_to 'Add a restaurant', new_restaurant_path, :class => 'new_link'

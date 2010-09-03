@@ -1,5 +1,5 @@
 @import url('http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:extralight,light,regular,bold')
-// @import 'scaffold'
+@import 'round'
 
 /* COLORS */
 $brown: #603018
@@ -70,6 +70,15 @@ div
     font-size: 12px
     list-style: square
 
+.add_new
+  font-family: $yan
+  font-size: 200%
+  text-align: right
+  padding-top: 50px
+  a.new_link
+    color: $teal
+    text-decoration: none
+
 .top_bar
   position: absolute
   right: 0
@@ -100,13 +109,16 @@ div
   padding: 30px
   background: $brown
   margin-bottom: 50px
-  a
-    color: $white
-    text-decoration: none
-    background: none
   h1
     font-size: 50px
     font-weight: 200
+    color: $gray
+    .arrow
+      color: mix($red, $brown)
+    a
+      color: $white
+      text-decoration: none
+      background: none
     strong
       font-weight: 400
 
@@ -120,18 +132,34 @@ div
     margin: 10px
 
 .main_links
+  margin: 50px 0
+ul.block_links
   overflow: auto
-  margin: 50px auto
-  width: 750px
-
   li
     float: left
     list-style: none
-    font-size: 200%
-    font-family: $yan
     text-align: center
-    line-height: 3em
     width: 250px
+    position: relative
+    .title
+      margin-top: 1em
+      margin-bottom: 1em
+      font-family: $yan
+      font-size: 200%
+      line-height: 1em
+    a.delete_link
+      font-size: 140%
+      position: absolute
+      right: 5px
+      top: 3px
+      border: none
+      background: none
+      color: $red
+      padding: 0 2px 2px 2px
+      +round(1em)
+      &:hover
+        color: $white
+        background: $red
     a
       margin: 5px
       display: block

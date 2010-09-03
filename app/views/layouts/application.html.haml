@@ -20,6 +20,10 @@
       %a{ :href => '/' }
         - precede 'Lunch' do
           %strong Haus
+      - if @title
+        %span.arrow
+          &raquo;
+        = @title
   .content
     = yield
 
