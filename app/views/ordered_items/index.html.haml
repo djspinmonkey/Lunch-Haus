@@ -1,0 +1,21 @@
+%h1 Listing ordered_items
+
+%table
+  %tr
+    %th Order
+    %th Item
+    %th
+    %th
+    %th
+
+  - @ordered_items.each do |ordered_item|
+    %tr
+      %td= ordered_item.order
+      %td= ordered_item.item
+      %td= link_to 'Show', ordered_item
+      %td= link_to 'Edit', edit_ordered_item_path(ordered_item)
+      %td= link_to 'Destroy', ordered_item, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New ordered_item', new_ordered_item_path

@@ -1,0 +1,10 @@
+%p
+  %b Order:
+  = @ordered_item.order
+%p
+  %b Item:
+  = @ordered_item.item
+
+= link_to 'Edit', edit_ordered_item_path(@ordered_item)
+\|
+= link_to 'Back', ordered_items_path

@@ -1,0 +1,10 @@
+Hi, this is Lunch Haus, a simple lunchtime clearing house for the office (or
+school, or home, or... the moon? No, no restaurants there as far as I know.)
+
+Lunch Haus is a Rails 3 app.  Simply install it, create some users, fill in the
+details of your favorite local restaurants and menu items, and you're good to
+go!  If you want something to eat, but don't feel like getting it, place an
+order and cross your fingers!  If you're going somewhere to eat and feeling
+helpful, check to see if there are any orders you could fill on the way!  Later
+on, Lunch Haus will tell you how much you owe and who you need to settle up
+with.

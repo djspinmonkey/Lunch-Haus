@@ -1,0 +1,16 @@
+.main_title
+  Lunch Haus
+
+.main_text
+  Welcome to Lunch Haus!  Feeling hungry but don't want to go out?  Place an
+  order!  Going out and feeling helpful?  Accept an order!  Lunch Haus will
+  help you settle up the tab later.
+
+.main_links
+  %ul
+    %li 
+      = link_to "Place an order", new_order_path
+    %li 
+      = link_to "Accept an order", orders_path
+    %li 
+      = link_to "Peruse local restaurants", restaurants_path
