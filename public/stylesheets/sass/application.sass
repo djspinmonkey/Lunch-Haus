@@ -1,22 +1,145 @@
-.main_title
-  color: brown
-  font-size: 50px
-  text-align: center
-  margin: 20px
-  height: 50px
+@import url('http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:extralight,light,regular,bold')
+// @import 'scaffold'
 
-.main_text
-  margin-left: auto
-  margin-right: auto
-  width: 500px
+/* COLORS */
+$brown: #603018
+$red: #d84800
+$white: #f0f0d8
+$gray: #d8d8c0
+$teal: #307878
 
-.main_links
-  margin-left: auto
-  margin-right: auto
-  width: 250px
+$yan: 'Yanone Kaffeesatz'
+/* weights: 200, 300, 400, 700 */
 
-  li
-    list-style: none
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td
+  margin: 0
+  padding: 0
+
+body, p, ol, ul, td
+  font-family: verdana, arial, helvetica, sans-serif
+  font-size: 14px
+  line-height: 20px
+
+body
+  background: $white
+
+h1,h2,h3,h4,h5,h6
+  font-family: $yan
+
+pre
+  background-color: #eee
+  padding: 10px
+  font-size: 11px
+
+a
+  color: $teal
+  &:visited
+    color: $brown
+  &:hover
+    background: $gray
+
+div
+  &.field, &.actions
+    margin-bottom: 10px   
+
+#notice
+  color: $teal
+
+.field_with_errors
+  padding: 2px
+  background-color: $red
+  display: table
+
+#error_explanation
+  width: 450px
+  border: 2px solid $red
+  padding: 7px
+  padding-bottom: 0
+  margin-bottom: 20px
+  background-color: #f0f0f0
+  h2
+    text-align: left
+    font-weight: bold
+    padding: 5px 5px 5px 15px
+    font-size: 12px
+    margin: -7px
+    margin-bottom: 0px
+    background-color: #c00
+    color: #fff
+  ul li
+    font-size: 12px
+    list-style: square
 
 .top_bar
-  text-align: right
+  position: absolute
+  right: 0
+  margin: 0 20px
+  color: $white
+  a, p
+    text-decoration: none
+    color: $white
+    font-family: $yan
+    font-size: 120%
+    font-weight: 200
+  p
+    float: left
+    padding: 10px 30px
+  a
+    float: right
+    background: $red
+    padding: 10px 30px
+    display: block
+    &:hover
+      padding-top: 20px
+      background: $red
+      color: $white
+
+.main_title 
+  font-family: $yan
+  text-align: center
+  padding: 30px
+  background: $brown
+  margin-bottom: 50px
+  a
+    color: $white
+    text-decoration: none
+    background: none
+  h1
+    font-size: 50px
+    font-weight: 200
+    strong
+      font-weight: 400
+
+
+.content
+  width: 750px
+  margin: 10px auto
+.main_text
+  clear: both
+  p
+    margin: 10px
+
+.main_links
+  overflow: auto
+  margin: 50px auto
+  width: 750px
+
+  li
+    float: left
+    list-style: none
+    font-size: 200%
+    font-family: $yan
+    text-align: center
+    line-height: 3em
+    width: 250px
+    a
+      margin: 5px
+      display: block
+      text-decoration: none
+      background: mix($gray, $white)
+      border: 2px solid $gray
+      color: $brown
+      &:hover
+        color: $teal
+        border-color: $teal
+
