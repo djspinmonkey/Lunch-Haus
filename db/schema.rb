@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(:version => 20100903195122) do
     t.integer  "item_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.float    "cost"
   end
 
   create_table "orders", :force => true do |t|

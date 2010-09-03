@@ -13,10 +13,22 @@ describe Order do
 
   it "should have a cost equal to the sum of its ordered items" do
     order = Order.make
-    item1 = Item.make(:cost => 1.5)
-    item2 = Item.make(:cost => 2)
-    order.add_item item1
-    order.add_item item2
+    order.add_item Item.make(:cost => 1.5)
+    order.add_item Item.make(:cost => 2)
     order.cost.should == 3.5
+  end
+
+  it "should have a consistent cost if one of the items changes price later" do
+    order = Order.make
+    item = Item.make :cost => 2
+    order.add_item item
+    original_cost = order.cost
+
+    item.cost = 3
+    item.save!
+
+    order.cost.should == original_cost
+    order.reload
+    order.cost.should == original_cost
   end
 end

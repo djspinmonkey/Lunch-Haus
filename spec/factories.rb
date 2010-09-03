@@ -5,19 +5,26 @@ require 'faker'
 
 User.blueprint do
   name { Faker::Name.name }
-end
-
-Order.blueprint do
-  orderer { User.make }
+  email { Faker::Internet.email }
+  password { Faker::Lorem.words(3).join('').first(6).to_s }  # Join 3 words to guarantee the 6 char minimum
 end
 
 Restaurant.blueprint do
   name { Faker::Company.name }
 end
 
+Order.blueprint do
+  orderer { User.make }
+end
+
 Sham.cost { |n| n / 2.0 }
 
 Item.blueprint do
-  name { Faker::Lorem.words(1) }
+  name { Faker::Lorem.words(1).first }
   cost { Sham.cost }
+end
+
+OrderedItem.blueprint do
+  order { Order.make }
+  item { Item.make }
 end
