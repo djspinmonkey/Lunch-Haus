@@ -2,6 +2,10 @@ require 'spec_helper'
 
 describe OrdersController do
 
+  setup do
+    signin_user User.make
+  end
+
   def mock_order(stubs={})
     @mock_order ||= mock_model(Order, stubs).as_null_object
   end
