@@ -18,6 +18,6 @@ class User < ActiveRecord::Base
   def balance
     # TODO This will eventually get unwieldy, but I'm implementing the simplest
     # thing that will work for now.  Refactor when scaling becomes an issue.
-    Order.find_all_by_fulfiller_id(self.id).collect(&:cost).sum - Order.fulfilled.where(:orderer => self).collect(&:cost).sum
+    Order.fulfilled.where(:fulfiller_id => self.id).collect(&:cost).sum - Order.fulfilled.where(:orderer_id => self.id).collect(&:cost).sum
   end
 end

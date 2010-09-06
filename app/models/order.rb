@@ -4,14 +4,21 @@ class Order < ActiveRecord::Base
   has_many :ordered_items
   has_many :items, :through => :ordered_items
 
+  scope :fulfilled, where('fulfiller_id is not null')
+
   validates_presence_of :orderer
+
+  before_save :initialize_cost
+
+  def initialize_cost
+    self.cost = self.expected_cost if self.cost.nil?
+  end
 
   def add_item (item)
     self.ordered_items << OrderedItem.create(:item => item, :order => self)
   end
 
-  def cost
+  def expected_cost
     self.ordered_items.collect(&:cost).sum
   end
-
 end

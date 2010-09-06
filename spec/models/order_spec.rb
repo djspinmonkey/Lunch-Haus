@@ -1,34 +1,79 @@
 require 'spec_helper'
 
 describe Order do
-  it "should be able to have items added to it" do
-    order = Order.make
-    item1 = Item.make
-    item2 = Item.make
-    order.add_item item1
-    order.add_item item2
-    order.items.should have(2).items
-    order.items.should include(item1, item2)
+  context '.fulfilled' do
+    it 'should return all fulfilled orders' do
+      alice = User.make
+      bob = User.make
+
+      order1 = Order.make(:orderer => alice, :fulfiller => bob)
+      order2 = Order.make(:orderer => bob, :fulfiller => nil)
+      order3 = Order.make(:orderer => bob, :fulfiller => alice)
+
+      pp Order.all
+      pp Order.fulfilled
+
+      Order.fulfilled.should have(2).orders
+      Order.fulfilled.should include(order1, order3)
+
+      bob.orders.fulfilled.should have(1).order
+      bob.orders.fulfilled.should include(order3)
+    end
   end
 
-  it "should have a cost equal to the sum of its ordered items" do
-    order = Order.make
-    order.add_item Item.make(:cost => 1.5)
-    order.add_item Item.make(:cost => 2)
-    order.cost.should == 3.5
+  context '#add_item' do
+    it "should add an item to the order" do
+      order = Order.make
+      item1 = Item.make
+      item2 = Item.make
+      order.add_item item1
+      order.add_item item2
+      order.items.should have(2).items
+      order.items.should include(item1, item2)
+    end
   end
 
-  it "should have a consistent cost if one of the items changes price later" do
-    order = Order.make
-    item = Item.make :cost => 2
-    order.add_item item
-    original_cost = order.cost
+  context '#expected_cost' do
+    it "should return the sum of the cost of its ordered items" do
+      order = Order.make
+      order.add_item Item.make(:cost => 1.5)
+      order.add_item Item.make(:cost => 2)
+      order.cost.should == 3.5
+    end
+  end
 
-    item.cost = 3
-    item.save!
+  context '#cost' do
+    before do
+      @order = Order.make
+      @item = Item.make(:cost => 2)
+      @order.add_item @item
+      @order.save
+    end
 
-    order.cost.should == original_cost
-    order.reload
-    order.cost.should == original_cost
+    context "before the order is fulfilled" do
+      it "should be nil" do
+        order.cost.should be_nil
+      end
+    end
+
+    context "after the order is fulfilled" do
+      before do
+        @order.fulfiller = User.make
+        @order.save
+      end
+
+      it "should be set" do
+        @order.cost.should == @item.cost
+      end
+
+      it "should be able to be updated" do
+        new_cost = @item.cost + 5
+
+        @order.cost = new_cost
+        @order.save
+        @order.reload
+        @order.cost.should == new_cost
+      end
+    end
   end
 end
