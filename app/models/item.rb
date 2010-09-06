@@ -1,5 +1,5 @@
 class Item < ActiveRecord::Base
-  belongs_to :restaraunt
+  belongs_to :restaurant
 
   validates_presence_of :name
   validates_presence_of :cost
