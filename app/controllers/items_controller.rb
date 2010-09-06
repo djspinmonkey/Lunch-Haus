@@ -1,4 +1,6 @@
 class ItemsController < ApplicationController
+  before_filter :get_restaurant
+  before_filter { @title = { :name => @restaurant.name, :link => @restaurant } }
   # GET /items
   # GET /items.xml
   def index
@@ -79,5 +81,10 @@ class ItemsController < ApplicationController
       format.html { redirect_to(items_url) }
       format.xml  { head :ok }
     end
+  end
+
+private
+  def get_restaurant
+    @restaurant = Restaurant.find(params[:restaurant_id])
   end
 end

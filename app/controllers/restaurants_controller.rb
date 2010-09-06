@@ -1,5 +1,5 @@
 class RestaurantsController < ApplicationController
-  before_filter { @title = 'Restaurants' }
+  before_filter { @title = { :name => 'Restaurants', :link => restaurants_path } }
 
   # GET /restaurants
   # GET /restaurants.xml

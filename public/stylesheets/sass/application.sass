@@ -23,8 +23,24 @@ body, p, ol, ul, td
 body
   background: $white
 
-h1,h2,h3,h4,h5,h6
-  font-family: $yan
+.content
+  h1,h2,h3,h4,h5,h6
+    font-family: $yan
+    color: $brown
+    padding-bottom: .25em
+    margin-bottom: .5em
+    font-weight: 400
+    .action
+      font-weight: 700
+    .angle
+      font-weight: 200
+
+  h1
+    font-size: 3em
+    border-bottom: 2px solid $brown
+
+  h2
+    font-size: 2em
 
 pre
   background-color: #eee
@@ -42,6 +58,10 @@ div
   &.field, &.actions
     margin-bottom: 10px   
 
+.field
+  font-size: 2em
+  input
+    font-size: 100%
 #notice
   color: $teal
 
@@ -78,6 +98,7 @@ div
   a.new_link
     color: $teal
     text-decoration: none
+    padding: 0 5px
 
 .top_bar
   position: absolute
@@ -116,9 +137,11 @@ div
     .arrow
       color: mix($red, $brown)
     a
-      color: $white
+      color: $gray
       text-decoration: none
       background: none
+    a.home_link
+      color: $white
     strong
       font-weight: 400
 
@@ -151,7 +174,7 @@ ul.block_links
       font-size: 140%
       position: absolute
       right: 5px
-      top: 3px
+      top: 5px
       border: none
       background: none
       color: $red
@@ -171,3 +194,14 @@ ul.block_links
         color: $teal
         border-color: $teal
 
+table.restaurant_items
+  border-spacing: 0
+  width: 100%
+  tr.even
+    background: mix($gray, $white)
+  td
+    padding: 5px
+  td.name
+    width: 500px
+  td.cost
+    text-align: right

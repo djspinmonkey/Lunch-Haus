@@ -17,13 +17,13 @@
 
   .main_title
     %h1
-      %a{ :href => '/' }
+      = link_to root_path, :class => 'home_link' do
         - precede 'Lunch' do
           %strong Haus
       - if @title
         %span.arrow
           &raquo;
-        = @title
+        = link_to @title[:name], @title[:link]
   .content
     = yield
 
