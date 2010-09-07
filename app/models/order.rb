@@ -16,6 +16,7 @@ class Order < ActiveRecord::Base
 
   def add_item (item)
     self.ordered_items << OrderedItem.create(:item => item, :order => self)
+    self.items
   end
 
   def expected_cost
