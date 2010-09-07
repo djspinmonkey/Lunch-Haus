@@ -11,7 +11,7 @@ class Order < ActiveRecord::Base
   before_save :initialize_cost
 
   def initialize_cost
-    self.cost = self.expected_cost if self.cost.nil?
+    self.cost = self.expected_cost if self.fulfilled? and self.cost.nil?
   end
 
   def add_item (item)
@@ -20,5 +20,9 @@ class Order < ActiveRecord::Base
 
   def expected_cost
     self.ordered_items.collect(&:cost).sum
+  end
+
+  def fulfilled?
+    !self.fulfiller_id.nil?
   end
 end
