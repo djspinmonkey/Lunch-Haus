@@ -7,17 +7,11 @@ describe Order do
       bob = User.make
 
       order1 = Order.make(:orderer => alice, :fulfiller => bob)
-      order2 = Order.make(:orderer => bob, :fulfiller => nil)
-      order3 = Order.make(:orderer => bob, :fulfiller => alice)
+      order2 = Order.make(:orderer => bob,   :fulfiller => nil)
+      order3 = Order.make(:orderer => bob,   :fulfiller => alice)
 
-      pp Order.all
-      pp Order.fulfilled
-
-      Order.fulfilled.should have(2).orders
+      Order.fulfilled.should have(2).fulfilled_orders
       Order.fulfilled.should include(order1, order3)
-
-      bob.orders.fulfilled.should have(1).order
-      bob.orders.fulfilled.should include(order3)
     end
   end
 
@@ -33,12 +27,22 @@ describe Order do
     end
   end
 
+  context '#fulfilled?' do
+    it "should return false if the order is not fulfilled" do
+      Order.make(:fulfiller => nil).should_not be_fulfilled
+    end
+
+    it "should return true if the order is fulfilled" do
+      Order.make(:fulfiller => User.make).should be_fulfilled
+    end
+  end
+
   context '#expected_cost' do
     it "should return the sum of the cost of its ordered items" do
       order = Order.make
       order.add_item Item.make(:cost => 1.5)
       order.add_item Item.make(:cost => 2)
-      order.cost.should == 3.5
+      order.expected_cost.should == 3.5
     end
   end
 
@@ -52,7 +56,7 @@ describe Order do
 
     context "before the order is fulfilled" do
       it "should be nil" do
-        order.cost.should be_nil
+        @order.cost.should be_nil
       end
     end
 
