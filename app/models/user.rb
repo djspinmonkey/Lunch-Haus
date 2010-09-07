@@ -10,7 +10,17 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me
 
-  scope :with_positive_balance, joins(:fulfilled_orders).joins(:placed_orders).where('sum(fulfilled_orders.cost) > sum(placed_orders.cost)')
+  # Returns all users with a positive balance.
+  #
+  def self.with_positive_balance
+    self.all.select { |u| u.balance > 0 }
+  end
+
+  # Returns all users with a negative balance.
+  #
+  def self.with_negative_balance
+    self.all.select { |u| u.balance < 0 }
+  end
 
   # Shows the net total owed to this user.  A negative balance indicates that
   # this user owes money.
