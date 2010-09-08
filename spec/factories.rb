@@ -28,3 +28,9 @@ OrderedItem.blueprint do
   order { Order.make }
   item { Item.make }
 end
+
+Payment.blueprint do
+  payer { User.make }
+  recipient { User.make }
+  amount { Sham.cost }
+end

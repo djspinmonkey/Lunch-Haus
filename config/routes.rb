@@ -1,5 +1,7 @@
 LunchHaus::Application.routes.draw do
 
+  resources :payments
+
   devise_for :users
 
   resources :ordered_items

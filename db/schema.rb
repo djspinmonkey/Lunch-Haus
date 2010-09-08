@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100904145903) do
+ActiveRecord::Schema.define(:version => 20100908163253) do
 
   create_table "items", :force => true do |t|
     t.string   "name"
@@ -35,6 +35,14 @@ ActiveRecord::Schema.define(:version => 20100904145903) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.float    "cost"
+  end
+
+  create_table "payments", :force => true do |t|
+    t.integer  "payer_id"
+    t.integer  "recipient_id"
+    t.float    "amount"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "restaurants", :force => true do |t|

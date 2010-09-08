@@ -10,13 +10,15 @@ describe User do
     Order.make(:orderer => @alice, :fulfiller => @charlie, :cost => 3)
     Order.make(:orderer => @alice, :fulfiller => @charlie, :cost => 5)
     Order.make(:orderer => @alice, :fulfiller => nil,      :cost => nil)
+
+    Payment.make(:payer => @bob, :recipient => @charlie, :amount => 3)
   end
 
   context '#balance' do
     it "should show the net amount owed to/by the user" do
       @alice.balance.should == -3
-      @bob.balance.should == -5
-      @charlie.balance.should == 8
+      @bob.balance.should == -2
+      @charlie.balance.should == 5
     end
   end
 
