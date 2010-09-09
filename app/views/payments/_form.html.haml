@@ -8,10 +8,10 @@
 
   .field
     = f.label :payer_id
-    = f.text_field :payer_id
+    = f.select :payer_id, User.all.collect { |u| [u.name, u.id] }
   .field
     = f.label :recipient_id
-    = f.text_field :recipient_id
+    = f.select :recipient_id, User.all.collect { |u| [u.name, u.id] }
   .field
     = f.label :amount
     = f.text_field :amount

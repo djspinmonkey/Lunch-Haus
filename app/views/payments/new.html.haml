@@ -1,5 +1,17 @@
 %h1 New payment
 
+= "You #{ current_user.balance.positive? ? 'are owed' : 'owe' } #{ number_to_currency(current_user.balance.abs) }."
+
+- if current_user.balance.nonzero? 
+  = "You can #{ current_user.balance.positive? ? "request it from" : "pay it to"} the following users:"
+
+  %ul
+    - @users.each do |user|
+      %li
+        = user.name
+        - if user.balance.abs < current_user.balance.abs
+          = "(#{user.balance.abs})"
+
 = render 'form'
 
 = link_to 'Back', payments_path

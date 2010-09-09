@@ -25,6 +25,8 @@ class PaymentsController < ApplicationController
   # GET /payments/new.xml
   def new
     @payment = Payment.new
+    @users = current_user.balance.positive? ? User.with_negative_balance : User.with_positive_balance
+    @users = @users.sort_by { |u| u.balance.abs }.reverse
 
     respond_to do |format|
       format.html # new.html.erb
