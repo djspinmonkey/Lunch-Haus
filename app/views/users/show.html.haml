@@ -2,6 +2,18 @@
   %b Name:
   = @user.name
 
+%p
+  %b Email:
+  = @user.email
+
+%p
+  %b Balance:
+  = number_to_currency(@user.balance)
+
+%p
+  %b Last Signed In:
+  = @user.last_sign_in_at
+
 = link_to 'Edit', edit_user_path(@user)
 \|
 = link_to 'Back', users_path
