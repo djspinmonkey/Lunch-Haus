@@ -1,4 +1,4 @@
-class Fixnum
+class Float
   def positive?
     self > 0
   end
