@@ -6,12 +6,10 @@
         - @order.errors.full_messages.each do |msg|
           %li= msg
 
+  = hidden_field :orderer_id, :value => current_user.id
   .field
-    = f.label :orderer_id
-    = f.text_field :orderer_id
-  .field
-    = f.label :fulfiller_id
-    = f.text_field :fulfiller_id
+    = f.label :item
+    = select_tag :item, Item.all.collect { |item| [ "#{item.restaurant.name} - #{item.name}", item.id ] }
   .field
     = f.label :date
     = f.date_select :date

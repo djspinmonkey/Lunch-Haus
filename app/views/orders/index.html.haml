@@ -1,21 +1,19 @@
-%h1 Listing orders
+%h1 Today's Open Orders
 
 %table
   %tr
     %th Orderer
-    %th Fulfiller
-    %th Date
-    %th
+    %th Restaurant
+    %th Items
     %th
     %th
 
   - @orders.each do |order|
     %tr
-      %td= order.orderer_id
-      %td= order.fulfiller_id
-      %td= order.date
-      %td= link_to 'Show', order
-      %td= link_to 'Edit', edit_order_path(order)
+      %td= order.orderer.name
+      %td= order.items.collect(&:restaurant).collect(&:name).uniq.join(', ')
+      %td= order.items.collect(&:name).uniq.join(', ')
+      %td= link_to 'Accept', edit_order_path(order)
       %td= link_to 'Destroy', order, :confirm => 'Are you sure?', :method => :delete
 
 %br
