@@ -8,6 +8,7 @@ class Order < ActiveRecord::Base
   scope :fulfilled, where('fulfiller_id is not null')
 
   validates_presence_of :orderer, :date
+  validate :has_items?
 
   before_save :initialize_cost
 
@@ -18,6 +19,10 @@ class Order < ActiveRecord::Base
   def add_item (item)
     self.ordered_items << OrderedItem.create(:item => item, :order => self)
     self.items
+  end
+
+  def has_items?
+    !self.items.empty?
   end
 
   def expected_cost

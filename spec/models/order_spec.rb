@@ -17,7 +17,7 @@ describe Order do
 
   context '#add_item' do
     it "should add an item to the order" do
-      order = Order.make
+      order = Order.spawn
       item1 = Item.make
       item2 = Item.make
       order.add_item item1
