@@ -33,6 +33,6 @@ class User < ActiveRecord::Base
     orders_placed    = Order.fulfilled.where(:orderer_id   => self.id).collect(&:cost).sum
     orders_fulfilled = Order.fulfilled.where(:fulfiller_id => self.id).collect(&:cost).sum 
 
-    payments_made + orders_fulfilled - payments_received - orders_placed
+    (payments_made + orders_fulfilled - payments_received - orders_placed).to_f
   end
 end
