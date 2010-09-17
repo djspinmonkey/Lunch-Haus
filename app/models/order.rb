@@ -1,12 +1,13 @@
 class Order < ActiveRecord::Base
   belongs_to :orderer, :class_name => "User"
   belongs_to :fulfiller, :class_name => "User"
-  has_many :ordered_items
+  has_many :ordered_items, :dependent => :destroy
   has_many :items, :through => :ordered_items
+  accepts_nested_attributes_for :items
 
   scope :fulfilled, where('fulfiller_id is not null')
 
-  validates_presence_of :orderer
+  validates_presence_of :orderer, :date
 
   before_save :initialize_cost
 

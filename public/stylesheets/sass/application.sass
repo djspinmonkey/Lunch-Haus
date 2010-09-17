@@ -23,6 +23,28 @@ body, p, ol, ul, td
 body
   background: $white
 
+input[type=text]
+  background: lighten($white, 5%)
+  border: 2px solid $gray
+input[type=submit]
+  background: lighten(mix($teal, $white), 10%)
+  border: 2px solid $teal
+  color: $teal
+  // font-weight: 700
+  width: 246px
+  text-align: center
+  +round(10px)
+  &:hover
+    background: $teal
+    color: lighten(mix($teal, $white), 10%)
+  &[disabled]
+    background: $gray
+    color: $gray * 0.8
+    border-color: $gray * 0.9
+    &:hover
+      // background: $gray
+
+
 .content
   h1,h2,h3,h4,h5,h6
     font-family: $yan
@@ -58,17 +80,24 @@ div
   &.field, &.actions
     margin-bottom: 10px   
 
+form.new_order
+  .date
+    color: $teal
 .field
-  font-size: 2em
+  @extend .big
   input
     font-size: 100%
+.actions
+  padding-top: 10px
+  text-align: right
+  @extend .big
 #notice
   color: $teal
 
 .field_with_errors
   padding: 2px
   background-color: $red
-  display: table
+  display: inline
 
 #error_explanation
   width: 450px
@@ -89,16 +118,25 @@ div
   ul li
     font-size: 12px
     list-style: square
-
-.add_new
+.big
   font-family: $yan
   font-size: 200%
-  text-align: right
-  padding-top: 50px
-  a.new_link
+  padding-bottom: 10px
+  a
     color: $teal
     text-decoration: none
     padding: 0 5px
+  input
+    font-family: $yan
+    font-size: 100%
+    padding: 0 2px
+    margin: 0 2px
+    &[type=text]
+      font-weight: 300
+
+.add_new
+  text-align: right
+  padding-top: 50px
 
 .top_bar
   position: absolute
@@ -201,6 +239,8 @@ table.restaurant_items
     background: mix($gray, $white)
   td
     padding: 5px
+  td.checkbox
+    width: 1em
   td.name
     width: 500px
   td.cost

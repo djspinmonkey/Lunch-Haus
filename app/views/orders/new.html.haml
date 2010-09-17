@@ -1,5 +1,53 @@
+:javascript
+  $(function(){
+    $('.restaurant').bind('click', function(event){
+      event.stopPropagation();
+      event.preventDefault();
+      var restaurant_url = $(this).find('a').attr('href');
+      var restaurant_name = $(this).find('p.title').text();
+      $.get(restaurant_url, function(data){
+        var items_html = $(data).find('.restaurant_items')
+        items_html.find('tr').each(function(){
+          var item_id = $(this).attr('id').split('_').pop();
+          $(this).prepend('<td class="checkbox"><input name="order[item_ids][]" value="'+item_id+'" type="checkbox"></input></td>');
+        });
+        $('#restaurants').hide()
+        $('.content h1').append(' from ' + restaurant_name);
+        $('#order_submit').removeAttr('disabled');
+        $('#items').append(items_html).show();
+      });
+    });
+    // $('form').bind('submit', function(event){
+    //   event.preventDefault();
+    //   console.log($(event.target).serializeArray());
+    // });
+  });
 %h1 New order
 
-= render 'form'
+  
+= form_for @order do |f|
+  .field
+    = f.label :date, "Order for"
+    = text_field_tag :date_string, @order.date.try(:strftime, '%b %d, %Y')
+  #restaurants
+    %p.big Order from:
+    %ul.block_links
+      - Restaurant.all.each do |restaurant|
+        %li[restaurant]
+          = link_to restaurant do
+            %p.title= restaurant.name
+            %p.info= pluralize(restaurant.items.length, 'menu item')
+  #items{ :style => 'display:none;'}
+    %p.big Choose items:
+  -if @order.errors.any?
+    #errorExplanation
+      %h2= "#{pluralize(@order.errors.count, "error")} prohibited this order from being saved:"
+      %ul
+        - @order.errors.full_messages.each do |msg|
+          %li= msg
+
+  .actions
+    = f.submit 'Save', :disabled => true
+  = f.hidden_field :orderer_id
 
 = link_to 'Back', orders_path

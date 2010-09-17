@@ -26,7 +26,7 @@ class OrdersController < ApplicationController
   # GET /orders/new
   # GET /orders/new.xml
   def new
-    @order = Order.new
+    @order = Order.new(:orderer => current_user, :date => Date.today)
 
     respond_to do |format|
       format.html # new.html.erb
@@ -42,6 +42,11 @@ class OrdersController < ApplicationController
   # POST /orders
   # POST /orders.xml
   def create
+    begin
+      params[:order][:date] = Date.parse(params[:date_string]) if params[:date_string]
+    rescue ArgumentError
+    end
+
     @order = Order.new(params[:order])
 
     respond_to do |format|

@@ -6,5 +6,5 @@
       - link_to restaurant do
         %p.title= restaurant.name
         %p.info= pluralize(restaurant.items.length, 'menu item')
-.add_new
-  = link_to 'Add a restaurant', new_restaurant_path, :class => 'new_link'
+.add_new.big
+  = link_to 'Add a restaurant', new_restaurant_path
