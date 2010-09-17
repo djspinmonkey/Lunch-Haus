@@ -1,9 +1,15 @@
 %p
-  %b Orderer:
-  = @order.orderer_id
+  %b Ordered by:
+  = @order.orderer.name
 %p
-  %b Fulfiller:
-  = @order.fulfiller_id
+  %b Accepted by:
+  = @order.fulfiller.nil? ? 'nobody' : @order.fulfiller.name
+%p
+  %b Items:
+  %ul
+    - @order.items.each do |item|
+      %li
+        = item.name
 %p
   %b Date:
   = @order.date
