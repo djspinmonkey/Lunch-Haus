@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
   before_filter :authenticate_user!
+  before_filter { @title = { :name => 'Orders', :link => orders_path } }
 
   # GET /orders
   # GET /orders.xml
@@ -26,7 +27,7 @@ class OrdersController < ApplicationController
   # GET /orders/new
   # GET /orders/new.xml
   def new
-    @order = Order.new(:orderer => current_user, :date => Date.today)
+    @order = Order.new(:orderer => current_user)
 
     respond_to do |format|
       format.html # new.html.erb
@@ -42,9 +43,14 @@ class OrdersController < ApplicationController
   # POST /orders
   # POST /orders.xml
   def create
-    begin
-      params[:order][:date] = Date.parse(params[:date_string]) if params[:date_string]
+    params[:order][:date] = begin
+      Date.parse(params[:date_string]) if params[:date_string]
     rescue ArgumentError
+      if params[:date_string] =~ /today/i
+        Date.today
+      elsif params[:date_string] =~ /tomorrow/i
+        Date.today + 1
+      end
     end
 
     @order = Order.new(params[:order])

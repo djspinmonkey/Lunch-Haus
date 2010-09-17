@@ -28,7 +28,7 @@
 = form_for @order do |f|
   .field
     = f.label :date, "Order for"
-    = text_field_tag :date_string, @order.date.try(:strftime, '%b %d, %Y')
+    = text_field_tag :date_string, @order.date.try(:strftime, '%b %d, %Y') || 'today'
   #restaurants
     %p.big Order from:
     %ul.block_links
