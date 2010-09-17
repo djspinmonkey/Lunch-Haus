@@ -1,7 +1,7 @@
 %h1= @restaurant.name
 
 %table.restaurant_items
-  - @restaurant.items.each do |item|
+  - @restaurant.items.sort.each do |item|
     %tr[item]{ :class => cycle('even', 'odd') }
       %td.name= link_to item.name, edit_restaurant_item_path(@restaurant, item)
       %td.cost= number_to_currency item.cost
