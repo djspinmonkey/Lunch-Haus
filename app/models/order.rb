@@ -7,10 +7,19 @@ class Order < ActiveRecord::Base
 
   scope :fulfilled, where('fulfiller_id is not null')
 
-  validates_presence_of :orderer, :date
-  validate :has_items?
+  validates_presence_of :orderer
+  validate :must_have_items
+  validate :must_have_valid_date
 
   before_save :initialize_cost
+
+  def must_have_items
+    errors.add_to_base("Must include at least one item") if self.items.empty?
+  end
+
+  def must_have_valid_date
+    errors.add :date, 'must be a valid date' unless self.date.kind_of? Time
+  end
 
   def initialize_cost
     self.cost = self.expected_cost if self.fulfilled? and self.cost.nil?
@@ -19,10 +28,6 @@ class Order < ActiveRecord::Base
   def add_item (item)
     self.ordered_items << OrderedItem.create(:item => item, :order => self)
     self.items
-  end
-
-  def has_items?
-    !self.items.empty?
   end
 
   def expected_cost

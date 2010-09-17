@@ -43,15 +43,7 @@ class OrdersController < ApplicationController
   # POST /orders
   # POST /orders.xml
   def create
-    params[:order][:date] = begin
-      Date.parse(params[:date_string]) if params[:date_string]
-    rescue ArgumentError
-      if params[:date_string] =~ /today/i
-        Date.today
-      elsif params[:date_string] =~ /tomorrow/i
-        Date.today + 1
-      end
-    end
+    params[:order][:date] = Chronic.parse(params[:date_string]) || 'bogus'
 
     @order = Order.new(params[:order])
 
