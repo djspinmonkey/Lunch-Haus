@@ -80,9 +80,6 @@ div
   &.field, &.actions
     margin-bottom: 10px   
 
-form.new_order
-  .date
-    color: $teal
 .field
   @extend .big
   input
@@ -91,8 +88,19 @@ form.new_order
   padding-top: 10px
   text-align: right
   @extend .big
+.flash
+  margin: 0 0 50px
+  padding: 10px
+  border: 2px solid $gray
+  font-family: $yan
+  font-size: 150%
+  font-weight: 300
+#error
+  color: $red
+  border-color: mix($gray, $red)
 #notice
   color: $teal
+  border-color: mix($gray, $teal)
 
 .field_with_errors
   padding: 2px

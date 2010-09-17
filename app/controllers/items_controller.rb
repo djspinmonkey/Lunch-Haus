@@ -26,7 +26,7 @@ class ItemsController < ApplicationController
   # GET /items/new
   # GET /items/new.xml
   def new
-    @item = Item.new
+    @item = Item.new(:restaurant => @restaurant)
 
     respond_to do |format|
       format.html # new.html.erb
@@ -46,7 +46,7 @@ class ItemsController < ApplicationController
 
     respond_to do |format|
       if @item.save
-        format.html { redirect_to(@item, :notice => 'Item was successfully created.') }
+        format.html { redirect_to(@item.restaurant, :notice => 'Item was successfully created.') }
         format.xml  { render :xml => @item, :status => :created, :location => @item }
       else
         format.html { render :action => "new" }

@@ -1,4 +1,4 @@
-= form_for :restaurant, @item do |f|
+= form_for [:restaurant, @item] do |f|
   -if @item.errors.any?
     #errorExplanation
       %h2= "#{pluralize(@item.errors.count, "error")} prohibited this item from being saved:"
@@ -6,6 +6,7 @@
         - @item.errors.full_messages.each do |msg|
           %li= msg
 
+  = f.hidden_field :restaurant_id
   .field
     = f.label :name
     = f.text_field :name

@@ -18,12 +18,14 @@
   .main_title
     %h1
       = link_to root_path, :class => 'home_link' do
-        - precede 'Lunch' do
+        = precede 'Lunch' do
           %strong Haus
       - if @title
         %span.arrow
           &raquo;
         = link_to @title[:name], @title[:link]
   .content
+    - flash.keys.each do |flash_type|
+      %div.flash{ :id => flash_type }= flash[flash_type]
     = yield
 
