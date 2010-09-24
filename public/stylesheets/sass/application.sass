@@ -18,12 +18,12 @@ body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,
 body, p, ol, ul, td
   font-family: verdana, arial, helvetica, sans-serif
   font-size: 14px
-  line-height: 20px
+  // line-height: 20px
 
 body
   background: $white
 
-input[type=text]
+input[type=text], input[type=password]
   background: lighten($white, 5%)
   border: 2px solid $gray
 input[type=submit]
@@ -60,9 +60,17 @@ input[type=submit]
   h1
     font-size: 3em
     border-bottom: 2px solid $brown
+    &.flip
+      border-bottom: none
+      border-top: 2px solid $brown
+      text-align: right
+      line-height: 1em
+      margin-top: 1em
+      padding-top: .25em
 
   h2
     font-size: 2em
+    border-bottom: 2px solid $brown
 
 pre
   background-color: #eee
@@ -78,14 +86,25 @@ a
 
 div
   &.field, &.actions
-    margin-bottom: 10px   
+    margin-bottom: .25em   
 
 .field
   @extend .big
   input
     font-size: 100%
+  & input:first-child, & label:first-child
+    min-width: 100px
+    text-align: right
+    display: inline-block
+
+.remember
+  margin-left: 120px
+  font-family: $yan
+  font-size: 140%
+  font-weight: 300
+
 .actions
-  padding-top: 10px
+  padding-top: .25em
   text-align: right
   @extend .big
 .flash
@@ -129,7 +148,7 @@ div
 .big
   font-family: $yan
   font-size: 200%
-  padding-bottom: 10px
+  padding-bottom: .25em
   a
     color: $teal
     text-decoration: none
@@ -173,7 +192,7 @@ div
 .main_title 
   font-family: $yan
   text-align: center
-  padding: 30px
+  padding: .5em
   background: $brown
   margin-bottom: 50px
   h1
