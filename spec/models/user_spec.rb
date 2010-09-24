@@ -6,10 +6,10 @@ describe User do
     @bob = User.make
     @charlie = User.make
 
-    Order.make(:orderer => @bob,   :fulfiller => @alice,   :cost => 5)
-    Order.make(:orderer => @alice, :fulfiller => @charlie, :cost => 3)
-    Order.make(:orderer => @alice, :fulfiller => @charlie, :cost => 5)
-    Order.make(:orderer => @alice, :fulfiller => nil,      :cost => nil)
+    Order.make(:orderer => @bob,   :accepter => @alice,   :cost => 5)
+    Order.make(:orderer => @alice, :accepter => @charlie, :cost => 3)
+    Order.make(:orderer => @alice, :accepter => @charlie, :cost => 5)
+    Order.make(:orderer => @alice, :accepter => nil,      :cost => nil)
 
     Payment.make(:payer => @bob, :recipient => @charlie, :amount => 3)
   end

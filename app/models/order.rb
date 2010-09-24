@@ -1,11 +1,11 @@
 class Order < ActiveRecord::Base
   belongs_to :orderer, :class_name => "User"
-  belongs_to :fulfiller, :class_name => "User"
+  belongs_to :accepter, :class_name => "User"
   has_many :ordered_items, :dependent => :destroy
   has_many :items, :through => :ordered_items
   accepts_nested_attributes_for :items
 
-  scope :fulfilled, where('fulfiller_id is not null')
+  scope :accepted, where('accepter_id is not null')
 
   validates_presence_of :orderer
   validate :must_have_items
@@ -22,7 +22,7 @@ class Order < ActiveRecord::Base
   end
 
   def initialize_cost
-    self.cost = self.expected_cost if self.fulfilled? and self.cost.nil?
+    self.cost = self.expected_cost if self.accepted? and self.cost.nil?
   end
 
   def add_item (item)
@@ -34,7 +34,7 @@ class Order < ActiveRecord::Base
     self.ordered_items.collect(&:cost).sum
   end
 
-  def fulfilled?
-    !self.fulfiller_id.nil?
+  def accepted?
+    !self.accepter_id.nil?
   end
 end

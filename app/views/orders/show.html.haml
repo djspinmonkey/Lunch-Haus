@@ -3,7 +3,7 @@
   = @order.orderer.name
 %p
   %b Accepted by:
-  = @order.fulfiller.nil? ? 'nobody' : @order.fulfiller.name
+  = @order.accepter.nil? ? 'nobody' : @order.accepter.name
 %p
   %b Items:
   %ul

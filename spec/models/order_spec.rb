@@ -1,17 +1,17 @@
 require 'spec_helper'
 
 describe Order do
-  context '.fulfilled' do
-    it 'should return all fulfilled orders' do
+  context '.accepted' do
+    it 'should return all accepted orders' do
       alice = User.make
       bob = User.make
 
-      order1 = Order.make(:orderer => alice, :fulfiller => bob)
-      order2 = Order.make(:orderer => bob,   :fulfiller => nil)
-      order3 = Order.make(:orderer => bob,   :fulfiller => alice)
+      order1 = Order.make(:orderer => alice, :accepter => bob)
+      order2 = Order.make(:orderer => bob,   :accepter => nil)
+      order3 = Order.make(:orderer => bob,   :accepter => alice)
 
-      Order.fulfilled.should have(2).fulfilled_orders
-      Order.fulfilled.should include(order1, order3)
+      Order.accepted.should have(2).accepted_orders
+      Order.accepted.should include(order1, order3)
     end
   end
 
@@ -27,13 +27,13 @@ describe Order do
     end
   end
 
-  context '#fulfilled?' do
-    it "should return false if the order is not fulfilled" do
-      Order.make(:fulfiller => nil).should_not be_fulfilled
+  context '#accepted?' do
+    it "should return false if the order is not accepted" do
+      Order.make(:accepter => nil).should_not be_accepted
     end
 
-    it "should return true if the order is fulfilled" do
-      Order.make(:fulfiller => User.make).should be_fulfilled
+    it "should return true if the order is accepted" do
+      Order.make(:accepter => User.make).should be_accepted
     end
   end
 
@@ -54,15 +54,15 @@ describe Order do
       @order.save
     end
 
-    context "before the order is fulfilled" do
+    context "before the order is accepted" do
       it "should be nil" do
         @order.cost.should be_nil
       end
     end
 
-    context "after the order is fulfilled" do
+    context "after the order is accepted" do
       before do
-        @order.fulfiller = User.make
+        @order.accepter = User.make
         @order.save
       end
 
