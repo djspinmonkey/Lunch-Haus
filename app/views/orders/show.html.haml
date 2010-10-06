@@ -4,16 +4,11 @@
 %p
   %b Accepted by:
   = @order.accepter.nil? ? 'nobody' : @order.accepter.name
+  %b Date:
+  = @order.date
 %p
   %b Items:
   %ul
     - @order.items.each do |item|
       %li
         = item.name
-%p
-  %b Date:
-  = @order.date
-
-= link_to 'Edit', edit_order_path(@order)
-\|
-= link_to 'Back', orders_path
