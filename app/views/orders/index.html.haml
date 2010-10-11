@@ -5,16 +5,18 @@
     %th Orderer
     %th Restaurant
     %th Items
+    %th.number Total
     %th
     %th
 
   - @orders.each do |order|
-    %tr
+    %tr{ :class => cycle('even', 'odd') }
       %td= order.orderer.name
       %td= order.items.collect(&:restaurant).collect(&:name).uniq.join(', ')
       %td= order.items.collect(&:name).uniq.join(', ')
-      %td= link_to 'Accept', edit_order_path(order)
-      %td= link_to 'Destroy', order, :confirm => 'Are you sure?', :method => :delete
+      %td.number= number_to_currency order.expected_cost
+      %td.control= link_to 'Accept', edit_order_path(order)
+      %td.control= link_to 'Destroy', order, :confirm => 'Are you sure?', :method => :delete
 
 %br
 

@@ -30,7 +30,6 @@ input[type=submit]
   background: lighten(mix($teal, $white), 10%)
   border: 2px solid $teal
   color: $teal
-  // font-weight: 700
   width: 246px
   text-align: center
   +round(10px)
@@ -96,6 +95,10 @@ div
     min-width: 100px
     text-align: right
     display: inline-block
+.label
+  min-width: 100px
+  text-align: right
+  display: inline-block
 
 .remember
   margin-left: 120px
@@ -149,6 +152,9 @@ div
   font-family: $yan
   font-size: 200%
   padding-bottom: .25em
+  .separate
+    color: $gray * 0.8
+    font-weight: 700
   a
     color: $teal
     text-decoration: none
@@ -160,6 +166,8 @@ div
     margin: 0 2px
     &[type=text]
       font-weight: 300
+    &[type=submit]
+      margin-top: 1em
 
 .add_new
   text-align: right
@@ -259,16 +267,26 @@ ul.block_links
         color: $teal
         border-color: $teal
 
-table.restaurant_items
+table
   border-spacing: 0
   width: 100%
   tr.even
     background: mix($gray, $white)
+  th
+    text-align: left
   td
     padding: 5px
   td.checkbox
     width: 1em
   td.name
     width: 500px
-  td.cost
+  .number
     text-align: right
+  .control
+    background: $white
+    font-family: $yan
+    font-weight: 300
+    font-size: 110%
+    text-align: right
+    a
+      text-decoration: none

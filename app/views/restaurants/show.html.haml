@@ -7,8 +7,7 @@
       %td.cost= number_to_currency item.cost
 
 .add_new
-  = link_to 'Add an item', new_restaurant_item_path(@restaurant), :class => 'new_link'
-
-= link_to 'Edit', edit_restaurant_path(@restaurant)
-\|
-= link_to 'Back', restaurants_path
+  .big
+    = link_to 'Add an item', new_restaurant_item_path(@restaurant), :class => 'new_link'
+    %span.separate= '|'
+    = link_to 'Edit this restaurant', edit_restaurant_path(@restaurant)

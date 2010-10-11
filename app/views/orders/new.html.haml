@@ -17,20 +17,15 @@
         $('#items').append(items_html).show();
       });
     });
-    // $('form').bind('submit', function(event){
-    //   event.preventDefault();
-    //   console.log($(event.target).serializeArray());
-    // });
   });
-%h1 New order
 
-  
+%h1 New order
 = form_for @order do |f|
   .field
     = f.label :date, "Order for"
     = text_field_tag :date_string, @order.date.try(:strftime, '%b %d, %Y') || 'today'
   #restaurants
-    %p.big Order from:
+    %p.big.label Order from
     %ul.block_links
       - Restaurant.all.each do |restaurant|
         %li[restaurant]
@@ -38,7 +33,7 @@
             %p.title= restaurant.name
             %p.info= pluralize(restaurant.items.length, 'menu item')
   #items{ :style => 'display:none;'}
-    %p.big Choose items:
+    %p.big.label Choose items
   -if @order.errors.any?
     #errorExplanation
       %h2= "#{pluralize(@order.errors.count, "error")} prohibited this order from being saved:"
@@ -46,8 +41,6 @@
         - @order.errors.full_messages.each do |msg|
           %li= msg
 
+  = f.hidden_field :orderer_id
   .actions
     = f.submit 'Save', :disabled => true
-  = f.hidden_field :orderer_id
-
-= link_to 'Back', orders_path
