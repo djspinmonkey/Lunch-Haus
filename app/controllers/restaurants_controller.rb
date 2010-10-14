@@ -1,5 +1,6 @@
 class RestaurantsController < ApplicationController
   before_filter { @title = { :name => 'Restaurants', :link => restaurants_path } }
+  before_filter :authenticate_user!, :except => [:index, :show]
 
   # GET /restaurants
   # GET /restaurants.xml
