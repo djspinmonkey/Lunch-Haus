@@ -34,7 +34,7 @@ gem 'chronic'
 group :development, :test do
   gem 'rails3-generators'
   gem 'rspec'
-  gem 'rspec-rails', ">= 2.0.0.beta.19"
+  gem 'rspec-rails', "~> 2.0"
   gem 'factory_girl'
   gem 'factory_girl_rails'
   gem 'faker'
