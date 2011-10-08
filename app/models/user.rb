@@ -26,12 +26,12 @@ class User < ActiveRecord::Base
   # this user owes money.
   #
   def balance
-    # TODO This will eventually get unwieldy, but I'm implementing the simplest
-    # thing that will work for now.  Refactor when scaling becomes an issue.
-    payments_made     = Payment.where(:payer_id     => self.id).collect(&:amount).sum
-    payments_received = Payment.where(:recipient_id => self.id).collect(&:amount).sum
-    orders_placed    = Order.accepted.where(:orderer_id   => self.id).collect(&:cost).sum
-    orders_accepted = Order.accepted.where(:accepter_id => self.id).collect(&:cost).sum 
+    # TODO This may eventually get unwieldy.  We can combine these queries or
+    # cache the balance if/when scaling becomes an issue.
+    payments_made     = Payment.where(:payer_id     => self.id).sum(:amount)
+    payments_received = Payment.where(:recipient_id => self.id).sum(:amount)
+    orders_placed     = Order.accepted.where(:orderer_id  => self.id).sum(:cost)
+    orders_accepted   = Order.accepted.where(:accepter_id => self.id).sum(:cost)
 
     (payments_made + orders_accepted - payments_received - orders_placed).to_f
   end

@@ -15,8 +15,9 @@ end
 
 Order.blueprint do
   orderer { User.make }
-  ordered_items { |order| [ OrderedItem.make(:order => order) ] }
   date { Time.now }
+
+  after_build { |order| order.ordered_items = [ OrderedItem.make(:order => order) ] }
 end
 
 Sham.cost { |n| n / 2.0 }

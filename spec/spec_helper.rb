@@ -3,6 +3,16 @@ ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 
+# TODO: Figure out why INSERTs aren't being rolled back after each test.  Rails
+# really sucks sometimes.  :-(
+#
+OrderedItem.delete_all
+Order.delete_all
+Item.delete_all
+Restaurant.delete_all
+Payment.delete_all
+User.delete_all
+
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
@@ -23,5 +33,7 @@ RSpec.configure do |config|
   # examples within a transaction, comment the following line or assign false
   # instead of true.
   config.use_transactional_fixtures = true
+  
+  config.include Factory::Syntax::Methods
 end
 

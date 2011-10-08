@@ -2,16 +2,16 @@ require 'spec_helper'
 
 describe User do
   before :all do
-    @alice = User.make
-    @bob = User.make
-    @charlie = User.make
+    @alice    = create(:user)
+    @bob      = create(:user)
+    @charlie  = create(:user)
 
-    Order.make(:orderer => @bob,   :accepter => @alice,   :cost => 5)
-    Order.make(:orderer => @alice, :accepter => @charlie, :cost => 3)
-    Order.make(:orderer => @alice, :accepter => @charlie, :cost => 5)
-    Order.make(:orderer => @alice, :accepter => nil,      :cost => nil)
+    create(:order, :orderer => @bob,   :accepter => @alice,   :cost => 5)
+    create(:order, :orderer => @alice, :accepter => @charlie, :cost => 3)
+    create(:order, :orderer => @alice, :accepter => @charlie, :cost => 5)
+    create(:order, :orderer => @alice, :accepter => nil,      :cost => nil)
 
-    Payment.make(:payer => @bob, :recipient => @charlie, :amount => 3)
+    create(:payment, :payer => @bob, :recipient => @charlie, :amount => 3)
   end
 
   context '#balance' do

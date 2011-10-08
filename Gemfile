@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.0'
+gem 'rails', '~> 3.0'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -23,8 +23,8 @@ gem 'ruby-debug19'
 # gem 'aws-s3', :require => 'aws/s3'
 
 gem 'jquery-rails'
-gem 'haml'
 gem 'haml-rails'
+gem 'sass'
 gem 'devise'
 gem 'chronic'
 
@@ -33,12 +33,9 @@ gem 'chronic'
 # and rake tasks are available in development mode:
 group :development, :test do
   gem 'rails3-generators'
-  gem 'rspec'
   gem 'rspec-rails', "~> 2.0"
-  gem 'factory_girl'
-  gem 'factory_girl_rails'
+  gem 'factory_girl_rails', "~> 1.2"
   gem 'faker'
-  gem 'rr'
   gem 'autotest'
   gem 'autotest-rails'
   gem 'autotest-growl'

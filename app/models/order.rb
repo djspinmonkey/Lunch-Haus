@@ -14,7 +14,7 @@ class Order < ActiveRecord::Base
   before_save :initialize_cost
 
   def must_have_items
-    errors.add :base, "Must include at least one item" if self.items.empty?
+    errors.add :base, "Must include at least one item" if self.ordered_items.empty?
   end
 
   def must_have_valid_date
@@ -23,11 +23,6 @@ class Order < ActiveRecord::Base
 
   def initialize_cost
     self.cost = self.expected_cost if self.accepted? and self.cost.nil?
-  end
-
-  def add_item (item)
-    self.ordered_items << OrderedItem.create(:item => item, :order => self)
-    self.items
   end
 
   def expected_cost
