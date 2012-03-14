@@ -8,3 +8,12 @@ order and cross your fingers!  If you're going somewhere to eat and feeling
 helpful, check to see if there are any orders you could fill on the way!  Later
 on, Lunch Haus will tell you how much you owe and who you need to settle up
 with.
+
+# Setup
+
+This app runs on Postgres locally. It can be a little funny. You'll probably
+need to manually create your user and databases:
+
+    createuser lunchhaus
+    createdb -Olunchahaus -Eutf8 lunchahaus_development
+    createdb -Olunchahaus -Eutf8 lunchahaus_test
