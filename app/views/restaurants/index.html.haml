@@ -3,7 +3,7 @@
     %li[restaurant]
       = link_to restaurant, :confirm => 'Really delete?', :method => :delete, :class => 'delete_link' do
         &times;
-      - link_to restaurant do
+      = link_to restaurant do
         %p.title= restaurant.name
         %p.info= pluralize(restaurant.items.length, 'menu item')
 .add_new.big
