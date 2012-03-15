@@ -16,8 +16,9 @@
       %td= order.items.collect(&:name).uniq.join(', ')
       %td.number= number_to_currency order.expected_cost
       %td.control= link_to 'Accept', edit_order_path(order)
-      %td.control= link_to 'Destroy', order, :confirm => 'Are you sure?', :method => :delete
+      - if order.orderer == current_user
+        %td.control= link_to 'Cancel', order, :confirm => 'Are you sure?', :method => :delete
 
 %br
 
-= link_to 'New order', new_order_path
+= link_to 'Place an order', new_order_path
