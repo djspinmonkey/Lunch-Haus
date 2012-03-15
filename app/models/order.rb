@@ -14,7 +14,7 @@ class Order < ActiveRecord::Base
   before_save :initialize_cost
 
   def must_have_items
-    errors.add :base, "Must include at least one item" if self.ordered_items.empty?
+    errors.add :base, "Must include at least one item" if self.items.empty?
   end
 
   def must_have_valid_date
