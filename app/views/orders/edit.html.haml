@@ -1,7 +1,18 @@
 %h1 Editing order
+= form_for @order do |f|
+  -if @order.errors.any?
+    #errorExplanation
+      %h2= "#{pluralize(@order.errors.count, "error")} prohibited this order from being saved:"
+      %ul
+        - @order.errors.full_messages.each do |msg|
+          %li= msg
 
-= render 'form'
-
-= link_to 'Show', @order
-\|
-= link_to 'Back', orders_path
+  = hidden_field :orderer_id, :value => current_user.id
+  .field
+    = f.label :item
+    = select_tag :item, Item.all.collect { |item| [ "#{item.restaurant.name} - #{item.name}", item.id ] }
+  .field
+    = f.label :date
+    = f.date_select :date
+  .actions
+    = f.submit 'Save'
