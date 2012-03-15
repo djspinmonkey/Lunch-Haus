@@ -15,5 +15,5 @@ This app runs on Postgres locally. It can be a little funny. You'll probably
 need to manually create your user and databases:
 
     createuser lunchhaus
-    createdb -Olunchahaus -Eutf8 lunchahaus_development
-    createdb -Olunchahaus -Eutf8 lunchahaus_test
+    createdb -Olunchhaus -Eutf8 lunchhaus_development
+    createdb -Olunchhaus -Eutf8 lunchhaus_test
