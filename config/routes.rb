@@ -10,6 +10,8 @@ LunchHaus::Application.routes.draw do
 
   resources :users
 
+  resources :order_acceptances, :only => [:create, :destroy]
+
   resources :restaurants do
     resources :items
   end
