@@ -122,6 +122,8 @@ GEM
       activesupport (= 3.1.0)
       bundler (~> 1.0)
       railties (= 3.1.0)
+    rails-footnotes (3.7.5)
+      rails (>= 3.0.0)
     railties (3.1.0)
       actionpack (= 3.1.0)
       activesupport (= 3.1.0)
@@ -205,6 +207,7 @@ DEPENDENCIES
   pg
   pry-rails
   rails (~> 3.1.0)
+  rails-footnotes (>= 3.7.5.rc4)
   rake (= 0.8.7)
   rspec-rails (~> 2.0)
   ruby-debug19

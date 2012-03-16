@@ -35,4 +35,5 @@ group :development, :test do
   gem 'autotest-fsevent'
   gem 'hpricot'
   gem 'ruby_parser'
+  gem 'rails-footnotes', '>= 3.7.5.rc4'
 end
