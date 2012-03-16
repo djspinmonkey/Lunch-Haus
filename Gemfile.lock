@@ -53,6 +53,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.2.0)
+    colors (0.0.6)
     columnize (0.3.4)
     devise (1.4.7)
       bcrypt-ruby (~> 3.0)
@@ -199,6 +200,7 @@ DEPENDENCIES
   cancan
   chronic
   coffee-rails (~> 3.1.0)
+  colors
   devise
   factory_girl_rails (~> 1.2)
   faker

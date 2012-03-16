@@ -37,4 +37,5 @@ group :development, :test do
   gem 'hpricot'
   gem 'ruby_parser'
   gem 'rails-footnotes', '>= 3.7.5.rc4'
+  gem 'colors'
 end
