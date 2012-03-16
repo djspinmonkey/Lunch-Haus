@@ -29,8 +29,8 @@ describe Order do
     it "should return the sum of the cost of its ordered items" do
       order = create :order
       order.items.clear
-      order.items << create(:item, :cost => 1.5)
-      order.items << create(:item, :cost => 2)
+      order.items << create(:item, :cost => 1.5, :restaurant => order.restaurant)
+      order.items << create(:item, :cost => 2, :restaurant => order.restaurant)
       order.expected_cost.should == 3.5
     end
   end
@@ -39,9 +39,9 @@ describe Order do
     before do
       @order = create :order
       @order.items.clear
-      @item = create :item, :cost => 2
+      @item = create :item, :cost => 2, :restaurant => @order.restaurant
       @order.items << @item
-      @order.save
+      @order.save!
     end
 
     context "before the order is accepted" do
@@ -53,7 +53,7 @@ describe Order do
     context "after the order is accepted" do
       before do
         @order.accepter = create :user
-        @order.save
+        @order.save!
       end
 
       it "should be set" do
@@ -64,7 +64,7 @@ describe Order do
         new_cost = @item.cost + 5
 
         @order.cost = new_cost
-        @order.save
+        @order.save!
         @order.reload
         @order.cost.should == new_cost
       end

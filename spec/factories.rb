@@ -14,10 +14,11 @@ Restaurant.blueprint do
 end
 
 Order.blueprint do
+  restaurant { Restaurant.make }
   orderer { User.make }
   date { Time.now }
 
-  after_build { |order| order.items = [ Item.make, Item.make ] }
+  after_build { |order| order.items = [Item.make(:restaurant => order.restaurant)] }
 end
 
 Sham.cost { |n| n / 2.0 }
