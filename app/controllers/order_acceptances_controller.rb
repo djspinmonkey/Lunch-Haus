@@ -1,5 +1,5 @@
 class OrderAcceptancesController < ApplicationController
-  #before_filter :authenticate_user!  # TODO: fix specs to not asplode with this
+  before_filter :authenticate_user!
 
   def create
     Order.transaction do

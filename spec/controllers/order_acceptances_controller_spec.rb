@@ -6,6 +6,7 @@ describe OrderAcceptancesController do
     let(:user)  { create :user }
 
     before do
+      sign_in :user, user
       Order.stub(:find) { order }
       User.stub(:find) { user }
       post(:create, :order_acceptances => [{:order => {:id => order.id}, :user => {:id => user.id}}])
@@ -21,7 +22,7 @@ describe OrderAcceptancesController do
     end
 
     context "with an unknown user" do
-      before do 
+      before do
         User.stub(:find) { raise ActiveRecord::RecordNotFound, "user not found" }
         post(:create, :order_acceptances => [{:order => {:id => order.id}, :user => {:id => user.id}}])
       end
