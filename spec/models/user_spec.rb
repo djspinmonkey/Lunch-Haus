@@ -14,15 +14,7 @@ describe User do
     create(:payment, :payer => @bob, :recipient => @charlie, :amount => 3)
   end
 
-  context '#balance' do
-    it "should show the net amount owed to/by the user" do
-      @alice.balance.should == -3
-      @bob.balance.should == -2
-      @charlie.balance.should == 5
-    end
-  end
-
-  context '.with_positive_balance' do
+  describe '.with_positive_balance' do
     it "should return all users with a positive balance" do
       users = User.with_positive_balance
       users.should have(1).users
@@ -30,11 +22,20 @@ describe User do
     end
   end
 
-  context '.with_negative_balance' do
+  describe '.with_negative_balance' do
     it 'should return all users with a negative balance' do
       users = User.with_negative_balance
       users.should have(2).users
       users.should include(@alice, @bob)
     end
   end
+
+  describe '#balance' do
+    it "should show the net amount owed to/by the user" do
+      @alice.balance.should == -3
+      @bob.balance.should == -2
+      @charlie.balance.should == 5
+    end
+  end
+
 end
