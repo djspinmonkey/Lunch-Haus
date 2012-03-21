@@ -8,7 +8,7 @@ LunchHaus::Application.routes.draw do
 
   resources :orders
 
-  resources :users
+  resources :users, :only => [:index, :show]
 
   resources :order_acceptances, :only => [:create, :destroy]
 

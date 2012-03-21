@@ -3,17 +3,13 @@
 %table
   %tr
     %th Name
-    %th
-    %th
-    %th
+    %th Email
+    %th Balance
+    %th Last Sign-in
 
   - @users.each do |user|
     %tr
-      %td= user.name
-      %td= link_to 'Show', user
-      %td= link_to 'Edit', edit_user_path(user)
-      %td= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete
-
-%br
-
-= link_to 'New user', new_user_path
+      %td= link_to user.name, user
+      %td= user.email
+      %td= number_to_currency user.balance
+      %td= user.last_sign_in_at? ? user.last_sign_in_at.to_s(:short) : ''

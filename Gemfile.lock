@@ -43,6 +43,7 @@ GEM
       ZenTest (= 4.5)
     bcrypt-ruby (3.0.1)
     builder (3.0.0)
+    cancan (1.6.7)
     chronic (0.6.4)
     coderay (1.0.5)
     coffee-rails (3.1.1)
@@ -52,6 +53,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.2.0)
+    colors (0.0.6)
     columnize (0.3.4)
     devise (1.4.7)
       bcrypt-ruby (~> 3.0)
@@ -195,8 +197,10 @@ DEPENDENCIES
   autotest-fsevent
   autotest-growl
   autotest-rails
+  cancan
   chronic
   coffee-rails (~> 3.1.0)
+  colors
   devise
   factory_girl_rails (~> 1.2)
   faker
